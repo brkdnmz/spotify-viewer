@@ -36,23 +36,8 @@ export default function Home() {
     }
   }, [songUrl]);
 
-  useEffect(() => {
-    const onPaste = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key.toLowerCase() === "v") {
-        navigator.clipboard
-          .readText()
-          .then((text) => (inputRef.current!.value = text))
-          .catch((e) => console.log(e));
-      }
-    };
-
-    document.addEventListener("keydown", onPaste);
-
-    return () => document.removeEventListener("keydown", onPaste);
-  }, []);
-
   const onSubmitUrl: FormEventHandler<HTMLFormElement> = (e) => {
-    // if (e.b) e.preventDefault();
+    e.preventDefault();
     const url = inputRef.current?.value;
     if (!url) return;
     setSongUrl(inputRef.current?.value);
