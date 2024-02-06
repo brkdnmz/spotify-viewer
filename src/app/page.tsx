@@ -7,7 +7,7 @@ import { api } from "~/trpc/react";
 import SongView from "./_components/song-view";
 
 const DEFAULT_SONG_URL =
-  "https://open.spotify.com/intl-tr/track/4PTG3Z6ehGkBFwjybzWkR8?si=f81cea349f3c4c8e";
+  "https://open.spotify.com/intl-tr/track/4PTG3Z6ehGkBFwjybzWkR8";
 
 export default function Home() {
   const [songUrl, setSongUrl] = useState<string>();
@@ -52,7 +52,7 @@ export default function Home() {
   }, []);
 
   const onSubmitUrl: FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
+    // if (e.b) e.preventDefault();
     const url = inputRef.current?.value;
     if (!url) return;
     setSongUrl(inputRef.current?.value);
