@@ -10,6 +10,8 @@ export const spotifyRouter = createTRPCRouter({
       const songPage = await (await fetch(url)).text();
       const $ = load(songPage);
       const head = $("head");
+      const songUrl = head.find("meta[property='og:url']").attr()!.content!;
+      const embedUrl = songUrl.replace("/track", "/embed/track");
       return {
         // meta: head
         //   .find("meta")
@@ -31,7 +33,8 @@ export const spotifyRouter = createTRPCRouter({
           .find("meta[name='music:musician']")
           .map((i, e) => e.attribs.content!)
           .toArray(),
-        url: head.find("meta[property='og:url']").attr()!.content!,
+        url: songUrl,
+        embedUrl,
         audioPreview: head.find("meta[property='og:audio']").attr()!.content!,
         audioType: head.find("meta[property='og:audio:type']").attr()!.content!,
         coverImage: head.find("meta[property='og:image']").attr()!.content!,

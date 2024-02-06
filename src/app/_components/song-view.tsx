@@ -50,9 +50,7 @@ export default function SongView({
           }
           title='Copy "Artist(s) - Title" to clipboard'
         >
-          {/* <Link href={song.url} target="_blank" title="Go to song"> */}
           {song.title}
-          {/* </Link> */}
           {transitions((style, item) =>
             item ? (
               <animated.div style={style}>
@@ -76,6 +74,13 @@ export default function SongView({
       <h3 className="text-xs font-light text-green-400" title="Release date">
         {new Date(song.releaseDate).toLocaleDateString("en-US")}
       </h3>
+
+      <iframe
+        className="box-content h-40 w-1/2 min-w-[300px] rounded-lg pt-10"
+        src={song.embedUrl}
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      ></iframe>
     </div>
   );
 }
