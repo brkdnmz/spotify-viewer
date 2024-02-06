@@ -10,6 +10,7 @@ const DEFAULT_SONG_URL =
   "https://open.spotify.com/intl-tr/track/4PTG3Z6ehGkBFwjybzWkR8";
 
 export default function Home() {
+  const [initialized, setInitialized] = useState(false);
   const [songUrl, setSongUrl] = useState<string>();
   const {
     data: song,
@@ -29,18 +30,19 @@ export default function Home() {
   });
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && !initialized) {
       const initialUrl = localStorage.getItem("last-url") ?? DEFAULT_SONG_URL;
       setSongUrl(initialUrl);
       inputRef.current!.value = initialUrl;
+      setInitialized(true);
     }
-  }, [songUrl]);
+  }, [initialized, songUrl]);
 
   const onSubmitUrl: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     const url = inputRef.current?.value;
     if (!url) return;
-    setSongUrl(inputRef.current?.value);
+    setSongUrl(url);
     localStorage.setItem("last-url", url);
   };
 
