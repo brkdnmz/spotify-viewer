@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
+      <body className={`font-sans ${inter.variable} min-h-screen bg-[#0a2613]`}>
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>
